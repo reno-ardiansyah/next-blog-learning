@@ -2,38 +2,36 @@ const fs = require('fs');
 const path = require('path');
 const chokidar = require('chokidar');
 
-const directories = ['atoms', 'molecules', 'templates', 'pages'];
+const directories = ['atoms', 'molecules', 'templates'];
 const basePath = path.resolve(__dirname, './components');
 let isGenerating = false;
 
-function generateIndex() {
+function generateIndex(dir) {
     if (isGenerating) return;
     isGenerating = true;
 
-    directories.forEach(dir => {
-        const dirPath = path.join(basePath, dir);
-        
-        if (fs.existsSync(dirPath)) {
-            const files = fs.readdirSync(dirPath).filter(file => file.endsWith('.tsx') && file !== 'index.tsx');
+    const dirPath = path.join(basePath, dir);
+    
+    if (fs.existsSync(dirPath)) {
+        const files = fs.readdirSync(dirPath).filter(file => file.endsWith('.tsx') && file !== 'index.tsx');
 
-            const indexPath = path.join(dirPath, 'index.tsx');
-            const content = files.map(file => {
-                const fileName = path.basename(file, '.tsx');
-                return `export { default as ${fileName} } from './${fileName}';`;
-            }).join('\n');
+        const indexPath = path.join(dirPath, 'index.tsx');
+        const content = files.map(file => {
+            const fileName = path.basename(file, '.tsx');
+            return `export { default as ${fileName} } from './${fileName}';`;
+        }).join('\n');
 
-            fs.writeFileSync(indexPath, content);
-            console.log(`Index file generated for ${dir}`);
-        } else {
-            console.warn(`Directory ${dirPath} does not exist.`);
-        }
-    });
+        fs.writeFileSync(indexPath, content);
+        console.log(`Index file generated for ${dir}`);
+    } else {
+        console.warn(`Directory ${dirPath} does not exist.`);
+    }
 
     isGenerating = false;
 }
 
 // Initial generation
-generateIndex();
+directories.forEach(generateIndex);
 
 // Watch for changes
 const watcher = chokidar.watch(directories.map(dir => path.join(basePath, dir, '*.tsx')), {
@@ -41,21 +39,24 @@ const watcher = chokidar.watch(directories.map(dir => path.join(basePath, dir, '
     ignoreInitial: true
 });
 
-watcher.on('add', path => {
-    if (!path.endsWith('index.tsx')) {
-        console.log(`File added: ${path}`);
-        generateIndex();
+watcher.on('add', filePath => {
+    const dir = path.basename(path.dirname(filePath));
+    if (!filePath.endsWith('index.tsx')) {
+        console.log(`File added in ${dir}: ${filePath}`);
+        generateIndex(dir);
     }
 })
-.on('change', path => {
-    if (!path.endsWith('index.tsx')) {
-        console.log(`File changed: ${path}`);
-        generateIndex();
+.on('change', filePath => {
+    const dir = path.basename(path.dirname(filePath));
+    if (!filePath.endsWith('index.tsx')) {
+        console.log(`File changed in ${dir}: ${filePath}`);
+        generateIndex(dir);
     }
 })
-.on('unlink', path => {
-    if (!path.endsWith('index.tsx')) {
-        console.log(`File removed: ${path}`);
-        generateIndex();
+.on('unlink', filePath => {
+    const dir = path.basename(path.dirname(filePath));
+    if (!filePath.endsWith('index.tsx')) {
+        console.log(`File removed in ${dir}: ${filePath}`);
+        generateIndex(dir);
     }
 });
