@@ -3,19 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { CardContentProps} from '@/app/types'
 
-interface CardHeaderProps {
-  imageSrc: string;
-  imageAlt: string;
-  slug?: string;
-}
-
-const CardHeader: React.FC<CardHeaderProps> = ({ imageSrc, imageAlt, slug = '#' }) => {
+const CardHeader: React.FC<CardContentProps> = ({ imageUrl = '', imageAlt = '', slug = '#' }) => {
   return (
     <Link href={slug}>
       <Image
         className={`rounded-t-lg `}
-        src={imageSrc}
+        src={imageUrl}
         alt={imageAlt}
         layout="responsive"
         width={300}

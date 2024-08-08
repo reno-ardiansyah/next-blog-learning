@@ -3,7 +3,7 @@ import Navbar from "../molecules/Navbar";
 
 const Header: React.FC = () => {
   return (
-    <header>
+    <header className="w-full shadow-md">
       <Navbar />
     </header>
   );

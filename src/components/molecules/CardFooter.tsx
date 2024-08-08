@@ -2,12 +2,9 @@
 
 import React from "react";
 import Link from "next/link";
+import { CardContentProps } from '@/app/types'
 
-interface CardFooterProps {
-  slug: string;
-}
-
-const CardFooter: React.FC<CardFooterProps> = ({ slug }) => {
+const CardFooter: React.FC<CardContentProps> = ({ slug = '#' }) => {
   return (
     <Link
       href={slug}

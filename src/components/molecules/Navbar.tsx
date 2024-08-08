@@ -3,42 +3,26 @@
 import React, { useState } from "react";
 import NavIcon from "../atoms/NavIcon";
 import NavLink from "../atoms/NavLink";
+import Container from "../atoms/Container";
+import NavToggleButton from "../atoms/NavToggleButton";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => {
+  const toggleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <header className="w-full shadow-md">
-      <div className="container max-w-6xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+    <>
+      <Container className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         <NavLink
           href="/"
           className="flex text-black items-center gap-2 text-lg font-bold "
         >
-          <NavIcon name="mountain" className="h-6 w-6" />
-          <span className="justify-center pt-1 font-semibold text-lg">
-            BlogKu
-          </span>
+          <NavIcon className="h-6 w-6" />
         </NavLink>
-        <button className="md:hidden" onClick={toggleMenu}>
-          <svg
-            className="h-6 w-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 6h16M4 12h16m-7 6h7"
-            ></path>
-          </svg>
-        </button>
+        <NavToggleButton type="button" onClick={toggleMenu} />
         <nav className={`md:flex hidden space-x-4`}>
           <NavLink href="/" className="font-medium navlink">
             Home
@@ -59,7 +43,7 @@ const Navbar: React.FC = () => {
             Login
           </NavLink>
         </nav>
-      </div>
+      </Container>
       {isOpen && (
         <div className="md:hidden">
           <nav className="flex flex-col space-y-2 p-4">
@@ -90,7 +74,7 @@ const Navbar: React.FC = () => {
           </nav>
         </div>
       )}
-    </header>
+    </>
   );
 };
 

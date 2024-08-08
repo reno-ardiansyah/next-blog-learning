@@ -1,11 +1,6 @@
-import React from 'react';
+import React from "react";
 
-interface NavIconProps {
-  name: string;
-  className?: string;
-}
-
-const NavIcon: React.FC<NavIconProps> = ({ name, className }) => {
+const NavIcon: React.FC<{ className?: string }> = ({ className }) => {
   return (
     <svg
       className={className}

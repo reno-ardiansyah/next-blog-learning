@@ -3,7 +3,7 @@ import HomePage from "@/components/pages/HomePage";
 
 const Home = () => {
   return (
-    <Container>
+    <Container className="mt-16">
       <HomePage />
     </Container>
   );

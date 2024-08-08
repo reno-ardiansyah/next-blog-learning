@@ -1,15 +1,8 @@
 'use client';
 
 import React from 'react';
-import { UserInterface } from '@/app/types';
+import { CardContentProps } from '@/app/types';
 import Link from 'next/link';
-
-interface CardContentProps {
-  title: string;
-  author: UserInterface;
-  description: string;
-  slug?: string
-}
 
 const CardContent: React.FC<CardContentProps> = ({ title, author, description, slug = '#' }) => {
   return (

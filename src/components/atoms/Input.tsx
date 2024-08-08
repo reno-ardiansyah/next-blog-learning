@@ -1,16 +1,15 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
-interface InputProps {
-  type: string;
-  id: string;
-  className?: string;
-  placeholder?: string;
-  required?: boolean;
-}
-
-const Input: React.FC<InputProps> = ({ type, id, className, placeholder, required, ...param }) => {
+const Input: React.FC<React.InputHTMLAttributes<HTMLInputElement>> = ({
+  type = "text",
+  id,
+  className,
+  placeholder,
+  required,
+  ...param
+}) => {
   return (
     <input
       type={type}

@@ -1,11 +1,7 @@
 'use client';
 
 import React from 'react';
-
-interface CardProps {
-  className?: string;
-  children: React.ReactNode;
-}
+import { CardProps } from '@/app/types'
 
 const Card: React.FC<CardProps> = ({ className, children }) => {
   return (
