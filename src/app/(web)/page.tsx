@@ -1,5 +1,6 @@
-import Container from "@/components/atoms/Container";
-import HomePage from "@/components/pages/HomePage";
+
+import Container from "@/components/Fragments/Container";
+import HomePage from "@/components/Pages/HomePage";
 
 const Home = () => {
   return (

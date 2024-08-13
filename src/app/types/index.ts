@@ -35,11 +35,12 @@ export interface CardProps {
   children: React.ReactNode;
 }
 
-export interface NavLinkProps {
+export interface LinksProps {
   href: string;
   children: React.ReactNode;
   className?: string;
   prefetch?: boolean;
+  isActive?: string
 }
 
 export interface CardContentProps {

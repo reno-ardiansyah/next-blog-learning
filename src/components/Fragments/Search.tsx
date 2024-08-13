@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Button from '../atoms/Button';
-import Input from '../atoms/Input';
-import SearchIcon from '../atoms/SearchIcon';
+import React from "react";
+import Button from "../Elements/Button";
+import Input from "../Elements/Input";
+import SearchIcon from "../Elements/SearchIcon";
 
 const SearchForm: React.FC = () => {
   return (
@@ -15,7 +15,12 @@ const SearchForm: React.FC = () => {
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <SearchIcon className="me-2" />
         </div>
-        <Input type="text" id="voice-search" placeholder="Search Mockups, Logos, Design Templates..." required />
+        <Input
+          type="text"
+          id="voice-search"
+          placeholder="Search Mockups, Logos, Design Templates..."
+          required
+        />
       </div>
       <Button
         type="submit"

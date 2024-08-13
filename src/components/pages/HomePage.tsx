@@ -1,5 +1,5 @@
-import SearchForm from "@/components/molecules/Search";
-import CardItem from "@/components/templates/CardItem";
+import SearchForm from "@/components/Fragments/Search";
+import CardItem from "@/components/Layouts/CardItem";
 import { Pagination } from "@nextui-org/pagination";
 import { CategoryInterface } from "@/app/types";
 
