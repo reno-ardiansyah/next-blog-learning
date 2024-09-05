@@ -1,5 +1,4 @@
-
-import Container from "@/components/Fragments/Container";
+import Container from "@/components/Elements/Container";
 import HomePage from "@/components/Pages/HomePage";
 
 const Home = () => {

@@ -1,4 +1,5 @@
 import React from "react";
+import cn from "@/utils/cn";
 
 export const MountainIcon: React.FC<{ className?: string }> = ({ className }) => {
   return (
@@ -22,7 +23,7 @@ export const MountainIcon: React.FC<{ className?: string }> = ({ className }) =>
 export const SearchIcon: React.FC<{ className?: string }> = ({ className }) => {
   return (
     <svg
-      className={`w-4 h-4 ${className}`}
+      className={cn('w-4 h-4', className)}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -42,7 +43,7 @@ export const SearchIcon: React.FC<{ className?: string }> = ({ className }) => {
 export const ToggleIcon: React.FC<{ className?: string }> = ({ className }) => {
   return (
     <svg
-      className={`h-6 w-6 ${className}`}
+      className={cn('h-6 w-6', className)}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"

@@ -1,5 +1,6 @@
 import { model, models, Schema } from "mongoose";
 import { UserInterface } from "../types";
+import bcrypt from 'bcryptjs';
 
 const UserSchema = new Schema<UserInterface>({
   avatar: {
@@ -29,7 +30,20 @@ const UserSchema = new Schema<UserInterface>({
   password: {
     type: String,
     required: true,
+  },
+  role: {
+    type: String,
+    default: 'User'
+  },
+}, { timestamps: true });
+
+UserSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    return next();
   }
-}, {timestamps: true});
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
 
 export const User = models.User || model<UserInterface>('User', UserSchema);

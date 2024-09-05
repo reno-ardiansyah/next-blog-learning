@@ -1,12 +1,32 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
+import { MONGODB_URI } from "../../constant";
 
-const connectDB = async (url: string) => {
-  try {
-    await mongoose.connect(url);
-  } catch (error: any) {
-    console.error(`Error: ${error.message}`);
-    process.exit(1); 
+interface MongooseCache {
+  conn: mongoose.Connection | null;
+  promise: Promise<mongoose.Connection> | null;
+}
+
+declare global {
+  // eslint-disable-next-line no-var
+  var mongoose: MongooseCache;
+}
+
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
+export async function connectToDatabase(): Promise<mongoose.Connection> {
+  if (cached.conn) {
+    return cached.conn;
   }
-};
 
-export default connectDB;
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(MONGODB_URI).then((mongoose) => {
+      return mongoose.connection;
+    });
+  }
+  cached.conn = await cached.promise;
+  return cached.conn;
+}

@@ -20,6 +20,7 @@ export interface UserInterface {
   dob: Date,
   email: string,
   password: string,
+  role: string,
 }
 //atome interface
 export interface ButtonProps {
@@ -27,8 +28,9 @@ export interface ButtonProps {
   className?: string;
   children?: React.ReactNode;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  size?: "sm" | "md" | "lg" | "xl";
+  variant?: "primary" | "outline" | "secondary";
 }
-
 
 export interface CardProps {
   className?: string;

@@ -1,5 +1,7 @@
-import Navbar from "@/components/Layouts/Navbar";
+import _Navbar from "@/components/Layouts/Navbar";
 import type { Metadata } from "next";
+
+// import "@nextui-org/theme/dist/nextui.css";  
 
 export const metadata: Metadata = {
   title: "Create BY Reno A",
@@ -13,7 +15,7 @@ export default function WebLayout({
 }>) {
   return (
     <>
-      <Navbar />
+      <_Navbar />
       <main className="w-full">{children}</main>;
     </>
   );

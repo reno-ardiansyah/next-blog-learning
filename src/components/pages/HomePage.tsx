@@ -1,9 +1,19 @@
+"use client";
+
 import SearchForm from "@/components/Fragments/Search";
 import CardItem from "@/components/Layouts/CardItem";
 import { Pagination } from "@nextui-org/pagination";
 import { CategoryInterface } from "@/app/types";
+import { Button } from "@nextui-org/react";
+import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 export default function HomePage() {
+  const { data: session, status } = useSession();
+
+  console.log(session);
+  console.log(status);
+
   const categories: CategoryInterface[] = [
     { title: "Tech", slug: "tech" },
     { title: "Health", slug: "health" },
@@ -48,16 +58,17 @@ export default function HomePage() {
           className="pagination-custom"
         />
       </div>
-      <div className="flex flex-wrap gap-4 p-4 w-full justify-center">
+      <div className="flex flex-wrap gap-4 p-4 w-full justify-between mt-5">
         {categories.map((category) => (
-          <div
+          <Button
+            as={Link}
+            href={`/category/${category.slug}`}
             key={category.slug}
-            className="bg-gray-100 p-4 rounded-lg shadow-md transition-transform transform hover:scale-105"
+            color="primary"
+            variant="ghost"
           >
-            <h2 className="text-center text-xl font-semibold">
-              {category.title}
-            </h2>
-          </div>
+            {category.title}
+          </Button>
         ))}
       </div>
     </div>

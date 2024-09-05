@@ -1,4 +1,4 @@
-import Container from "@/components/Fragments/Container";
+import Container from "@/components/Elements/Container";
 
 const Author = () => {
   return (

@@ -1,4 +1,11 @@
-export const mongo_url = 'mongodb+srv://reno44:reno-password@blog-next-learning.96pjh0j.mongodb.net/blogs?retryWrites=true&w=majority&appName=blog-next-learning'
+const MONGODB_USERNAME      = process.env.MONGODB_USERNAME
+const MONGODB_PASSWORD      = process.env.MONGODB_PASSWORD
+const MONGODB_CLUSTER_NAME  = process.env.MONGODB_CLUSTER_NAME
+const MONGODB_CLUSTER_ID    = process.env.MONGODB_CLUSTER_ID
+const MONGODB_DOMAIN        = process.env.MONGODB_DOMAIN
+const MONGODB_DATABASE      = process.env.MONGODB_DATABASE
+const MONGODB_RETRY_WRITES  = process.env.MONGODB_RETRY_WRITES
+const MONGODB_WRITE_CONCERN = process.env.MONGODB_WRITE_CONCERN
+const MONGODB_APP_NAME      = process.env.MONGODB_APP_NAME
 
-
-// reno-password
+export const MONGODB_URI = `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@${MONGODB_CLUSTER_NAME}.${MONGODB_CLUSTER_ID}.${MONGODB_DOMAIN}/${MONGODB_DATABASE}?retryWrites=${MONGODB_RETRY_WRITES}&w=${MONGODB_WRITE_CONCERN}&appName=${MONGODB_APP_NAME}`
